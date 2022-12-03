@@ -1,0 +1,40 @@
+nav {
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  padding: 0px 10px;
+}
+
+nav .icon {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+nav .icon:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+nav form {
+  margin-left: 45px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+nav form input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+/* form:hover {
+  box-shadow: 0px 0px 3px 4px rgba(1, 73, 182, 0.3);
+} */

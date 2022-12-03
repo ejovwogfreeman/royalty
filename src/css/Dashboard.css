@@ -1,0 +1,9 @@
+.cont {
+  padding-top: 80px;
+  padding-left: 210px;
+  transition: 0.5s ease-in-out;
+}
+
+.end {
+  padding-left: 10px;
+}

@@ -1,0 +1,26 @@
+.side-bar {
+  width: 200px;
+  position: fixed;
+  margin-left: 0px;
+  top: 60px;
+  height: 100%;
+  transition: 0.5s ease-in-out;
+  background-color: whitesmoke;
+}
+
+.side-bar a {
+  transition: 0.5s ease-in-out;
+  border-left: 3px solid transparent;
+  border-bottom: rgba(0, 0, 0, 0.1);
+  color: rgb(1, 27, 1);
+}
+
+.side-bar a:hover,
+.side-bar a:focus {
+  border-color: rgb(1, 27, 1);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.hide {
+  margin-left: -200px;
+}
