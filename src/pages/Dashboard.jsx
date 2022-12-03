@@ -33,10 +33,10 @@ const Dashboard = ({ open }) => {
               <td>mark@gmail.com</td>
               <td>12/2/2022</td>
               <td>
-                <span className="ms-1">
+                <span className="ms-1" style={{ cursor: "pointer" }}>
                   <BsPencilSquare />
                 </span>
-                <span className="ms-2">
+                <span className="ms-2" style={{ cursor: "pointer" }}>
                   <BsTrash />
                 </span>
               </td>
@@ -47,10 +47,10 @@ const Dashboard = ({ open }) => {
               <td>john@gmail.com</td>
               <td>12/2/2022</td>
               <td>
-                <span className="ms-1">
+                <span className="ms-1" style={{ cursor: "pointer" }}>
                   <BsPencilSquare />
                 </span>
-                <span className="ms-2">
+                <span className="ms-2" style={{ cursor: "pointer" }}>
                   <BsTrash />
                 </span>
               </td>
@@ -61,10 +61,10 @@ const Dashboard = ({ open }) => {
               <td>mary@gmail.com</td>
               <td>12/2/2022</td>
               <td>
-                <span className="ms-1">
+                <span className="ms-1" style={{ cursor: "pointer" }}>
                   <BsPencilSquare />
                 </span>
-                <span className="ms-2">
+                <span className="ms-2" style={{ cursor: "pointer" }}>
                   <BsTrash />
                 </span>
               </td>
