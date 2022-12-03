@@ -14,7 +14,7 @@ const Dashboard = ({ open }) => {
         Add Tenant
       </button>
 
-      <div class="table-responsive mt-3 me-3">
+      <div className="table-responsive mt-3 me-3">
         <table className="table">
           <caption>List of users</caption>
           <thead>
@@ -72,13 +72,13 @@ const Dashboard = ({ open }) => {
           </tbody>
         </table>
         <div
-          class="modal fade"
+          className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog">
+          <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalLabel">
@@ -93,53 +93,56 @@ const Dashboard = ({ open }) => {
               </div>
               <form className="p-3">
                 <div className="row">
-                  <div class="mb-3 col">
-                    <label for="exampleInputEmail1" class="form-label">
+                  <div className="mb-3 col">
+                    <label htmlFor="exampleInputEmail1" className="form-label">
                       Email address
                     </label>
                     <input
                       type="email"
-                      class="form-control"
+                      className="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="Enter Email"
                     />
                   </div>
-                  <div class="mb-3 col">
-                    <label for="exampleInputPassword1" class="form-label">
+                  <div className="mb-3 col">
+                    <label
+                      htmlFor="exampleInputPassword1"
+                      className="form-label"
+                    >
                       Password
                     </label>
                     <input
                       type="password"
-                      class="form-control"
+                      className="form-control"
                       id="exampleInputPassword1"
                       placeholder="Enter Password"
                     />
                   </div>
                 </div>
-                <div class="mb-3">
-                  <label for="street" class="form-label">
+                <div className="mb-3">
+                  <label htmlFor="street" className="form-label">
                     Street
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="street"
                     placeholder="123 Main St."
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="apartment" class="form-label">
+                <div className="mb-3">
+                  <label htmlFor="apartment" className="form-label">
                     Apartment
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="apartment"
                     placeholder="Apartment, floor etc..."
                   />
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" className="btn btn-primary">
                   Submit
                 </button>
               </form>
