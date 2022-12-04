@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../css/Navbar.css";
 import logo from "../assets/logo.ico";
 import { FiMenu } from "react-icons/fi";
