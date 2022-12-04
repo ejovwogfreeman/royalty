@@ -13,7 +13,7 @@ const Sidebar = ({ open }) => {
           <small className="d-flex px-3 p-2 m-0 text-muted">SUPER ADMIN</small>
         </li>
         <li className="list-group-item p-0 bg-transparent border-0">
-          <Link className="d-flex px-3 p-2 align-items-center">
+          <Link to="/dashboard" className="d-flex px-3 p-2 align-items-center">
             <AiOutlineDashboard /> <span className="ms-2">Dashboard</span>
           </Link>
         </li>
@@ -21,7 +21,7 @@ const Sidebar = ({ open }) => {
           <small className="d-flex px-3 p-2 m-0 text-muted">ROSTER</small>
         </li>
         <li className="list-group-item p-0 bg-transparent border-0">
-          <Link className="d-flex px-3 p-2 align-items-center">
+          <Link to="/tenants" className="d-flex px-3 p-2 align-items-center">
             <BsBuilding /> <span className="ms-2">Tenants</span>
           </Link>
         </li>

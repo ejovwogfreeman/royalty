@@ -12,12 +12,12 @@
   transition: 0.5s ease-in-out;
   border-left: 3px solid transparent;
   border-bottom: rgba(0, 0, 0, 0.1);
-  color: rgb(1, 27, 1);
+  color: #006666;
 }
 
 .side-bar a:hover,
 .side-bar a:focus {
-  border-color: rgb(1, 27, 1);
+  border-color: #006666;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
