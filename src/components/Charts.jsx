@@ -1,6 +1,6 @@
 import { Chart } from "react-google-charts";
 export const data = [
-  ["Task", "Hours per Day"],
+  ["Task", "Royalty"],
   ["Work", 11],
   ["Eat", 2],
   ["Commute", 2],
@@ -8,7 +8,7 @@ export const data = [
   ["Sleep", 7],
 ];
 export const options = {
-  title: "My Daily Activities",
+  title: "Royalty Revenue Chart",
 };
 
 const Charts = () => {
