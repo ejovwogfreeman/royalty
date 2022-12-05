@@ -18,7 +18,7 @@ const Users = ({ open }) => {
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            Add Artist
+            Add User
           </button>
         </div>
         <div className="d-flex align-items-center justify-content-between mt-3">
@@ -203,7 +203,7 @@ const Users = ({ open }) => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h1 className="modal-title fs-5" id="exampleModalLabel">
-                    Add Artist
+                    Add User
                   </h1>
                   <button
                     type="button"
