@@ -1,6 +1,7 @@
 .cont {
   padding-top: 80px;
   padding-left: 210px;
+  padding-right: 10px;
   transition: 0.5s ease-in-out;
 }
 
@@ -8,9 +9,74 @@
   padding-left: 10px;
 }
 
+table {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 100%;
+  font-size: 12px;
+}
+
+table tr,
+table td,
+table th {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px;
+}
+
+table thead {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+table tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 @media screen and (max-width: 800px) {
   .cont {
     width: 1000px;
     overflow-x: scroll;
   }
+}
+
+.top-texts {
+  display: flex;
+  padding: 0px;
+}
+
+.top-texts li {
+  padding: 2px 10px;
+  font-size: 12px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border-radius: 2px;
+  transition: 0.1s ease-in-out;
+  cursor: pointer;
+}
+.top-texts li:hover {
+  background-color: white;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+form {
+  font-size: 14px;
+}
+form input {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: none;
+  border-radius: 3px;
+  padding: 5px;
+}
+form input:focus {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.bottom-texts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bottom-texts li {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 1px 10px;
+  font-size: 12px;
 }

@@ -4,7 +4,8 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import React from "react";
 import Dashboard from "./pages/Dashboard";
-import Tenants from "./pages/Tenants";
+import Users from "./pages/Users";
+import Artist from "./pages/Artists";
 
 function App() {
   const [open, setOpen] = React.useState(true);
@@ -18,7 +19,8 @@ function App() {
         <Sidebar open={open} />
         <Routes>
           <Route path="/dashboard" element={<Dashboard open={open} />} />
-          <Route path="/tenants" element={<Tenants open={open} />} />
+          <Route path="/users" element={<Users open={open} />} />
+          <Route path="/artists" element={<Artist open={open} />} />
         </Routes>
       </div>
     </BrowserRouter>

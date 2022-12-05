@@ -84,7 +84,9 @@ const Dashboard = ({ open }) => {
           <p className="m-0">Monthly Revenue(Sales Period)</p>
           <small className="text-muted">Royalty(Nov 2021 - Feb 2022)</small>
         </div>
-        <Charts />
+        <div style={{ width: "100%" }}>
+          <Charts />
+        </div>
       </div>
     </div>
   );
