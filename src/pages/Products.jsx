@@ -3,7 +3,7 @@ import "../css/General.css";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-const Users = ({ open }) => {
+const Products = ({ open }) => {
   return (
     <div className={open ? "cont" : "cont end"}>
       <div
@@ -11,14 +11,14 @@ const Users = ({ open }) => {
         style={{ border: "1px solid rgba(0,0,0,0.2)" }}
       >
         <div className="d-flex align-items-center">
-          <span className="h4">Users</span>
+          <span className="h4">Products</span>
           <button
             type="button"
             className="btn btn-primary p-1 ms-2"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            Add User
+            Release
           </button>
         </div>
         <div className="d-flex align-items-center justify-content-between mt-3">
@@ -42,19 +42,30 @@ const Users = ({ open }) => {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Nickname</th>
+                <th>ISRC</th>
+                <th>Artist</th>
+                <th>Title</th>
+                <th>Display Artist</th>
                 <th>Type</th>
-                <th>Email</th>
-                <th>Action</th>
+                <th>Genres</th>
+                <th>Release Date</th>
+                <th>Tracks</th>
+                <th>Status</th>
+                <th>Actions</th>
+                <th>Splits</th>
               </tr>
             </thead>
             <tbody>
               <tr>
+                <td>765347740100</td>
+                <td>Tunestar</td>
+                <td>Follow Me</td>
+                <td>Tunestar</td>
+                <td>Audio</td>
+                <td>Afro-Pop</td>
+                <td>2021-07-07</td>
+                <td>Live</td>
                 <td>1</td>
-                <td>Mark Powells</td>
-                <td>Artist</td>
-                <td>mark@gmail.com</td>
                 <td>
                   <span className="ms-1" style={{ cursor: "pointer" }}>
                     <BsPencilSquare />
@@ -63,12 +74,20 @@ const Users = ({ open }) => {
                     <BsTrash />
                   </span>
                 </td>
+                <td>
+                  <span>2</span> <span>+</span>
+                </td>
               </tr>
               <tr>
-                <td>2</td>
-                <td>John Doe</td>
-                <td>Artist</td>
-                <td>john@gmail.com</td>
+                <td>765347740100</td>
+                <td>Tunestar</td>
+                <td>Follow Me</td>
+                <td>Tunestar</td>
+                <td>Audio</td>
+                <td>Afro-Pop</td>
+                <td>2021-07-07</td>
+                <td>Live</td>
+                <td>1</td>
                 <td>
                   <span className="ms-1" style={{ cursor: "pointer" }}>
                     <BsPencilSquare />
@@ -77,12 +96,20 @@ const Users = ({ open }) => {
                     <BsTrash />
                   </span>
                 </td>
+                <td>
+                  <span>2</span> <span>+</span>
+                </td>
               </tr>
               <tr>
-                <td>3</td>
-                <td>Mary Sally</td>
-                <td>Artist</td>
-                <td>mary@gmail.com</td>
+                <td>765347740100</td>
+                <td>Tunestar</td>
+                <td>Follow Me</td>
+                <td>Tunestar</td>
+                <td>Audio</td>
+                <td>Afro-Pop</td>
+                <td>2021-07-07</td>
+                <td>Live</td>
+                <td>1</td>
                 <td>
                   <span className="ms-1" style={{ cursor: "pointer" }}>
                     <BsPencilSquare />
@@ -91,103 +118,8 @@ const Users = ({ open }) => {
                     <BsTrash />
                   </span>
                 </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Morgan Freeman</td>
-                <td>Artist</td>
-                <td>morgan@gmail.com</td>
                 <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Frank Smith</td>
-                <td>Artist</td>
-                <td>frank@gmail.com</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Powells Mark</td>
-                <td>Artist</td>
-                <td>powells@gmail.com</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Doe John</td>
-                <td>Artist</td>
-                <td>doe@gmail.com</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Sally Mary</td>
-                <td>Artist</td>
-                <td>sally@gmail.com</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td>Freeman Morgan</td>
-                <td>Artist</td>
-                <td>freeman@gmail.com</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>10</td>
-                <td>Smith Frank</td>
-                <td>Artist</td>
-                <td>smith@gmail.com</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
+                  <span>2</span> <span>+</span>
                 </td>
               </tr>
             </tbody>
@@ -291,4 +223,4 @@ const Users = ({ open }) => {
   );
 };
 
-export default Users;
+export default Products;

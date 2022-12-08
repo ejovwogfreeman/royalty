@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BsBuilding } from "react-icons/bs";
 import { FaUserCircle, FaMusic } from "react-icons/fa";
+import { BsMic, BsDisc, BsPercent, BsCoin } from "react-icons/bs";
 
 const Sidebar = ({ open }) => {
   return (
@@ -13,7 +14,7 @@ const Sidebar = ({ open }) => {
           <small className="d-flex px-3 p-2 m-0 text-muted">SUPER ADMIN</small>
         </li>
         <li className="list-group-item p-0 bg-transparent border-0">
-          <Link to="/dashboard" className="d-flex px-3 p-2 align-items-center">
+          <Link to="/" className="d-flex px-3 p-2 align-items-center">
             <AiOutlineDashboard /> <span className="ms-2">Dashboard</span>
           </Link>
         </li>
@@ -27,33 +28,33 @@ const Sidebar = ({ open }) => {
         </li>
         <li className="list-group-item p-0 bg-transparent border-0">
           <Link to="/artists" className="d-flex px-3 p-2 align-items-center">
-            <FaMusic /> <span className="ms-2">Artists</span>
+            <BsMic /> <span className="ms-2">Artists</span>
           </Link>
         </li>
         <li className="list-group-item p-2 bg-transparent border-0">
           <small className="d-flex px-3 p-2 m-0 text-muted">CATALOG</small>
         </li>
         <li className="list-group-item p-0 bg-transparent border-0">
-          <Link className="d-flex px-3 p-2 align-items-center">
-            <BsBuilding /> <span className="ms-2">Track</span>
+          <Link to="/assets" className="d-flex px-3 p-2 align-items-center">
+            <BsCoin /> <span className="ms-2">Assets</span>
           </Link>
         </li>
         <li className="list-group-item p-0 bg-transparent border-0">
-          <Link className="d-flex px-3 p-2 align-items-center">
-            <FaUserCircle /> <span className="ms-2">Release</span>
+          <Link to="/products" className="d-flex px-3 p-2 align-items-center">
+            <BsDisc /> <span className="ms-2">Products</span>
+          </Link>
+        </li>
+        <li className="list-group-item p-0 bg-transparent border-0">
+          <Link to="/splits" className="d-flex px-3 p-2 align-items-center">
+            <BsPercent /> <span className="ms-2">Splits</span>
           </Link>
         </li>
         <li className="list-group-item p-2 bg-transparent border-0">
           <small className="d-flex px-3 p-2 m-0 text-muted">MORE</small>
         </li>
         <li className="list-group-item p-0 bg-transparent border-0">
-          <Link className="d-flex px-3 p-2 align-items-center">
+          <Link to="/royalty" className="d-flex px-3 p-2 align-items-center">
             <BsBuilding /> <span className="ms-2">Filess</span>
-          </Link>
-        </li>
-        <li className="list-group-item p-0 bg-transparent border-0">
-          <Link className="d-flex px-3 p-2 align-items-center">
-            <FaUserCircle /> <span className="ms-2">Accounting</span>
           </Link>
         </li>
       </ul>
