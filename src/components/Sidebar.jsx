@@ -3,7 +3,7 @@ import "../css/Sidebar.css";
 import { Link } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BsBuilding } from "react-icons/bs";
-import { FaUserCircle, FaMusic } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import { BsMic, BsDisc, BsPercent, BsCoin } from "react-icons/bs";
 
 const Sidebar = ({ open }) => {
@@ -54,7 +54,7 @@ const Sidebar = ({ open }) => {
         </li>
         <li className="list-group-item p-0 bg-transparent border-0">
           <Link to="/royalty" className="d-flex px-3 p-2 align-items-center">
-            <BsBuilding /> <span className="ms-2">Filess</span>
+            <BsBuilding /> <span className="ms-2">Royalty</span>
           </Link>
         </li>
       </ul>
