@@ -80,3 +80,16 @@ form input:focus {
   padding: 1px 10px;
   font-size: 12px;
 }
+
+select {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+a {
+  color: rgba(0, 0, 0, 0.8);
+}
+a:hover {
+  color: rgba(0, 0, 0, 0.8);
+}

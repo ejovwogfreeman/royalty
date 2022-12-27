@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/General.css";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
 import { IoMdArrowDropdown } from "react-icons/io";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Splits = ({ open }) => {
+  const [splits, setSplits] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`https://api.royalti.io/split/`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "applicatioon/json",
+          Authorization: "Bearer 7bd60554-4f63-4c62-a5f6-c29c3f67cb2a",
+        },
+      })
+      .then((res) => {
+        setSplits(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className={open ? "cont" : "cont end"}>
       <div
@@ -12,14 +34,17 @@ const Splits = ({ open }) => {
       >
         <div className="d-flex align-items-center">
           <span className="h4">Splits</span>
-          {/* <button
-            type="button"
-            className="btn btn-primary p-1 ms-2"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          >
-            Add User
-          </button> */}
+          <div className="d-flex align-items-center">
+            <button
+              type="button"
+              className="btn p-1 ms-2"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              style={{ backgroundColor: "rgb(211, 231, 211)" }}
+            >
+              Add Split
+            </button>
+          </div>
         </div>
         <div className="d-flex align-items-center justify-content-between mt-3">
           <ul className="top-texts text-muted m-0">
@@ -52,66 +77,42 @@ const Splits = ({ open }) => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>ZA56E2100151 -A:My Place</td>
-                <td></td>
-                <td>USLZJ1765813</td>
-                <td></td>
-                <td>
-                  Steveland Emmanuel: 40 <br />
-                  Nicole Ahmad: 30 <br />
-                  Royal Records: 30
-                </td>
-                <td></td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>ZA56E2100151 -A:My Place</td>
-                <td></td>
-                <td>USLZJ1765813</td>
-                <td></td>
-                <td>
-                  Steveland Emmanuel: 40 <br />
-                  Nicole Ahmad: 30 <br />
-                  Royal Records: 30
-                </td>
-                <td></td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>ZA56E2100151 -A:My Place</td>
-                <td></td>
-                <td>USLZJ1765813</td>
-                <td></td>
-                <td>
-                  Steveland Emmanuel: 40 <br />
-                  Nicole Ahmad: 30 <br />
-                  Royal Records: 30
-                </td>
-                <td></td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash />
-                  </span>
-                </td>
-              </tr>
+              {splits.map((x, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{x.Asset ? x.Asset.title : null}</td>
+                    <td>{x.Product ? x.Product.upc : null}</td>
+                    <td>{x.Asset ? x.Asset.isrc : null}</td>
+                    <td></td>
+                    <td>
+                      {x.SplitShares.map((y) => {
+                        return (
+                          <>
+                            <span>
+                              {y.User.firstName}&nbsp;{y.User.lastName}:&nbsp;
+                              {y.Share}
+                            </span>
+                            <br />
+                          </>
+                        );
+                      })}
+                    </td>
+                    <td></td>
+                    <td>
+                      <Link
+                        to={`/edit-split/${x.id}`}
+                        className="ms-1"
+                        style={{ cursor: "pointer" }}
+                      >
+                        <BsPencilSquare />
+                      </Link>
+                      <span className="ms-2" style={{ cursor: "pointer" }}>
+                        <BsTrash />
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <div className="d-flex align-items-center justify-content-between mt-3">
@@ -136,7 +137,7 @@ const Splits = ({ open }) => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h1 className="modal-title fs-5" id="exampleModalLabel">
-                    Add User
+                    Add Split
                   </h1>
                   <button
                     type="button"

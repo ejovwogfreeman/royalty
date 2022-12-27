@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/General.css";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
 import { IoMdArrowDropdown } from "react-icons/io";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Products = ({ open }) => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`https://api.royalti.io/product/`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "applicatioon/json",
+          Authorization: "Bearer 7bd60554-4f63-4c62-a5f6-c29c3f67cb2a",
+        },
+      })
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className={open ? "cont" : "cont end"}>
       <div
@@ -57,62 +78,42 @@ const Products = ({ open }) => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>765347740100</td>
-                <td>Tunestar</td>
-                <td>Follow Me</td>
-                <td>Tunestar</td>
-                <td>Audio</td>
-                <td>Afro-Pop</td>
-                <td>2021-07-07</td>
-                <td>Live</td>
-                <td>1</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-                <td>
-                  <span>2</span> <span>+</span>
-                </td>
-              </tr>
-              <tr>
-                <td>765347740100</td>
-                <td>Tunestar</td>
-                <td>Follow Me</td>
-                <td>Tunestar</td>
-                <td>Audio</td>
-                <td>Afro-Pop</td>
-                <td>2021-07-07</td>
-                <td>Live</td>
-                <td>1</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-                <td>
-                  <span>2</span> <span>+</span>
-                </td>
-              </tr>
+              {products.map((x, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{x.Artists[0].artistName}</td>
+                    <td>{x.Artists[0].artistName}</td>
+                    <td>{x.title}</td>
+                    <td>{x.displayArtist}</td>
+                    <td>{x.type}</td>
+                    <td>
+                      {x.mainGenre ? x.mainGenre[0] : null}
+                      {x.subGenre ? x.subGenre[0] : null}
+                    </td>
+                    <td>{x.releaseDate}</td>
+                    <td>tracks</td>
+                    <td>status</td>
+                    <td>
+                      <Link
+                        to={`/edit-product/${x.id}`}
+                        className="ms-1"
+                        style={{ cursor: "pointer" }}
+                      >
+                        <BsPencilSquare />
+                      </Link>
+                      <span className="ms-2" style={{ cursor: "pointer" }}>
+                        <BsTrash
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal3"
+                        />
+                      </span>
+                    </td>
+                    <td>
+                      <span>2</span> <span>+</span>
+                    </td>
+                  </tr>
+                );
+              })}
               <tr>
                 <td>765347740100</td>
                 <td>Tunestar</td>
@@ -166,170 +167,6 @@ const Products = ({ open }) => {
                 <div className="modal-header">
                   <h1 className="modal-title fs-5" id="exampleModalLabel">
                     Add Product
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <form className="p-3">
-                  <div className="mb-3">
-                    <label htmlFor="artist-name" className="form-label">
-                      Artist Name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="artist-name"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter Artist Name"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="user" className="form-label">
-                      User
-                    </label>
-                    <select
-                      class="form-select"
-                      aria-label="Default select example"
-                      id="user"
-                    >
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="apartment" className="form-label">
-                      Sign Date
-                    </label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="apartment"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="artist-split" className="form-label">
-                      Artist Split
-                    </label>
-                    <div class="input-group mb-3">
-                      <input
-                        type="number"
-                        id="artist-split"
-                        class="form-control"
-                        placeholder="Enter artist % spit"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                      />
-                      <span class="input-group-text" id="basic-addon2">
-                        %
-                      </span>
-                    </div>
-                  </div>
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div
-            className="modal fade"
-            id="exampleModal2"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="exampleModalLabel">
-                    Edit Product
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <form className="p-3">
-                  <div className="mb-3">
-                    <label htmlFor="artist-name" className="form-label">
-                      Artist Name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="artist-name"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter Artist Name"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="user" className="form-label">
-                      User
-                    </label>
-                    <select
-                      class="form-select"
-                      aria-label="Default select example"
-                      id="user"
-                    >
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="apartment" className="form-label">
-                      Sign Date
-                    </label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="apartment"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="artist-split" className="form-label">
-                      Artist Split
-                    </label>
-                    <div class="input-group mb-3">
-                      <input
-                        type="number"
-                        id="artist-split"
-                        class="form-control"
-                        placeholder="Enter artist % spit"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                      />
-                      <span class="input-group-text" id="basic-addon2">
-                        %
-                      </span>
-                    </div>
-                  </div>
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div
-            className="modal fade"
-            id="exampleModal"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="exampleModalLabel">
-                    Add User
                   </h1>
                   <button
                     type="button"

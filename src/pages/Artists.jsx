@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/General.css";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
 import { IoMdArrowDropdown } from "react-icons/io";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Artist = ({ open }) => {
+  const [artist, setArtist] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`https://api.royalti.io/artist/`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "applicatioon/json",
+          Authorization: "Bearer 7bd60554-4f63-4c62-a5f6-c29c3f67cb2a",
+        },
+      })
+      .then((res) => {
+        setArtist(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className={open ? "cont" : "cont end"}>
       <div
@@ -50,196 +71,30 @@ const Artist = ({ open }) => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark Powells</td>
-                <td>mark</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>John Doe</td>
-                <td>john</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Mary Sally</td>
-                <td>mary</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Morgan Freeman</td>
-                <td>morgan</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Frank Smith</td>
-                <td>frank</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Powells Mark</td>
-                <td>powells</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Doe John</td>
-                <td>Doe</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Sally Mary</td>
-                <td>sally</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td>Freeman Morgan</td>
-                <td>freeman</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>10</td>
-                <td>Smith Frank</td>
-                <td>smith</td>
-                <td>
-                  <span className="ms-1" style={{ cursor: "pointer" }}>
-                    <BsPencilSquare
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2"
-                    />
-                  </span>
-                  <span className="ms-2" style={{ cursor: "pointer" }}>
-                    <BsTrash
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3"
-                    />
-                  </span>
-                </td>
-              </tr>
+              {artist.map((x, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{x.artistName}</td>
+                    <td>{x.Users.length > 0 ? x.Users[0].fullName : null}</td>
+                    <td>
+                      <Link
+                        to={`/edit-artist/${x.id}`}
+                        className="ms-1"
+                        style={{ cursor: "pointer" }}
+                      >
+                        <BsPencilSquare />
+                      </Link>
+                      <span className="ms-2" style={{ cursor: "pointer" }}>
+                        <BsTrash
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal3"
+                        />
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <div className="d-flex align-items-center justify-content-between mt-3">
@@ -265,88 +120,6 @@ const Artist = ({ open }) => {
                 <div className="modal-header">
                   <h1 className="modal-title fs-5" id="exampleModalLabel">
                     Add Artist
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <form className="p-3">
-                  <div className="mb-3">
-                    <label htmlFor="artist-name" className="form-label">
-                      Artist Name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="artist-name"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter Artist Name"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="user" className="form-label">
-                      User
-                    </label>
-                    <select
-                      class="form-select"
-                      aria-label="Default select example"
-                      id="user"
-                    >
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="apartment" className="form-label">
-                      Sign Date
-                    </label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="apartment"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="artist-split" className="form-label">
-                      Artist Split
-                    </label>
-                    <div class="input-group mb-3">
-                      <input
-                        type="number"
-                        id="artist-split"
-                        class="form-control"
-                        placeholder="Enter artist % spit"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                      />
-                      <span class="input-group-text" id="basic-addon2">
-                        %
-                      </span>
-                    </div>
-                  </div>
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div
-            className="modal fade"
-            id="exampleModal2"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="exampleModalLabel">
-                    Edit Artist
                   </h1>
                   <button
                     type="button"
