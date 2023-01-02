@@ -3,10 +3,70 @@ import "../css/General.css";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
 import { IoMdArrowDropdown } from "react-icons/io";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastifyContext } from "../context/ToastifyContext";
 
 const Users = ({ open }) => {
   const [users, setUsers] = useState([]);
+  const [ToastifyState, setToastifyState] = React.useContext(ToastifyContext);
+  const [loading, setLoading] = useState(false);
+  const [deleteId, setDeleteId] = useState({});
+
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    nickName: "",
+    userType: "Artist",
+  });
+
+  const { firstName, lastName, email, nickName, userType } = form;
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+    axios
+      .post(`https://api.royalti.io/user/`, form, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer 7bd60554-4f63-4c62-a5f6-c29c3f67cb2a",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setToastifyState({
+          ...ToastifyState,
+          message: "User Created Successfully",
+          variant: "success",
+          open: true,
+        });
+        navigate("/");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setToastifyState({
+          ...ToastifyState,
+          message: "Please fill all Field",
+          variant: "error",
+          open: true,
+        });
+        window.location.reload();
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     axios
@@ -25,6 +85,45 @@ const Users = ({ open }) => {
         console.log(err);
       });
   }, []);
+
+  const handleDelete = (id) => {
+    const user = users.filter((x) => x.id === id);
+    setDeleteId(user[0].id);
+  };
+
+  const deleteBtn = () => {
+    console.log(deleteId);
+    setLoading(true);
+    axios
+      .delete(`https://api.royalti.io/user/${deleteId}`, {
+        headers: {
+          Authorization: "Bearer 7bd60554-4f63-4c62-a5f6-c29c3f67cb2a",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setToastifyState({
+          ...ToastifyState,
+          message: "User Deleted successfully",
+          variant: "success",
+          open: true,
+        });
+        setLoading(false);
+        navigate("/");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setToastifyState({
+          ...ToastifyState,
+          message: "An Error Occured",
+          variant: "error",
+          open: true,
+        });
+      });
+  };
 
   return (
     <div className={open ? "cont" : "cont end"}>
@@ -65,7 +164,8 @@ const Users = ({ open }) => {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
+                <th>ID</th>
+                <th>Fullname</th>
                 <th>Nickname</th>
                 <th>Type</th>
                 <th>Email</th>
@@ -78,6 +178,7 @@ const Users = ({ open }) => {
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{x.fullName}</td>
+                    <td>{x.TenantUser ? x.TenantUser.nickName : null}</td>
                     <td>{x.TenantUser.userType[0]}</td>
                     <td>{x.email ? x.email : null}</td>
                     <td>
@@ -92,6 +193,7 @@ const Users = ({ open }) => {
                         <BsTrash
                           data-bs-toggle="modal"
                           data-bs-target="#exampleModal3"
+                          onClick={() => handleDelete(x.id)}
                         />
                       </span>
                     </td>
@@ -131,63 +233,99 @@ const Users = ({ open }) => {
                     aria-label="Close"
                   ></button>
                 </div>
-                <form className="p-3">
+                <form className="p-3" onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label htmlFor="artist-name" className="form-label">
-                      Artist Name
+                      First Name
                     </label>
                     <input
                       type="text"
+                      name="firstName"
+                      value={firstName}
                       className="form-control"
                       id="artist-name"
                       aria-describedby="emailHelp"
-                      placeholder="Enter Artist Name"
+                      placeholder="First Name"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="artist-name" className="form-label">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={lastName}
+                      className="form-control"
+                      id="artist-name"
+                      aria-describedby="emailHelp"
+                      placeholder="Last Name"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="artist-name" className="form-label">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={email}
+                      className="form-control"
+                      id="artist-name"
+                      aria-describedby="emailHelp"
+                      placeholder="email"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="artist-name" className="form-label">
+                      Nick Name
+                    </label>
+                    <input
+                      type="text"
+                      name="nickName"
+                      value={nickName}
+                      className="form-control"
+                      id="artist-name"
+                      aria-describedby="emailHelp"
+                      placeholder="Nick Name"
+                      onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="user" className="form-label">
-                      User
+                      User Type
                     </label>
                     <select
                       class="form-select"
                       aria-label="Default select example"
                       id="user"
+                      name="userType"
+                      value={userType}
+                      onChange={handleChange}
+                      required
                     >
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      <option value="Artist">Artist</option>
+                      <option value="Manager">Manager</option>
+                      <option value="Admin">Admin</option>
                     </select>
                   </div>
-                  <div className="mb-3">
-                    <label htmlFor="apartment" className="form-label">
-                      Sign Date
-                    </label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="apartment"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="artist-split" className="form-label">
-                      Artist Split
-                    </label>
-                    <div class="input-group mb-3">
-                      <input
-                        type="number"
-                        id="artist-split"
-                        class="form-control"
-                        placeholder="Enter artist % spit"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                      />
-                      <span class="input-group-text" id="basic-addon2">
-                        %
-                      </span>
-                    </div>
-                  </div>
-                  <button type="submit" className="btn btn-primary">
-                    Submit
+                  <button
+                    type="submit"
+                    className="btn"
+                    style={{
+                      background: "rgb(0, 102, 102)",
+                      color: "white",
+                    }}
+                    disabled={loading}
+                  >
+                    {loading ? "LOADING..." : "CREATE USER"}
                   </button>
                 </form>
               </div>
@@ -222,8 +360,12 @@ const Users = ({ open }) => {
                   >
                     Close
                   </button>
-                  <button type="button" class="btn btn-outline-danger">
-                    Save changes
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger"
+                    onClick={() => deleteBtn()}
+                  >
+                    DELETE
                   </button>
                 </div>
               </div>
