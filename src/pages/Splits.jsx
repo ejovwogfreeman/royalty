@@ -85,15 +85,12 @@ const Splits = ({ open }) => {
                     <td>{x.Asset ? x.Asset.isrc : null}</td>
                     <td></td>
                     <td>
-                      {x.SplitShares.map((y) => {
+                      {x.SplitShares.map((y, i) => {
                         return (
-                          <>
-                            <span>
-                              {y.User.firstName}&nbsp;{y.User.lastName}:&nbsp;
-                              {y.Share}
-                            </span>
-                            <br />
-                          </>
+                          <span key={i}>
+                            {y.User.firstName}&nbsp;{y.User.lastName}:&nbsp;
+                            {y.Share}
+                          </span>
                         );
                       })}
                     </td>
@@ -164,7 +161,7 @@ const Splits = ({ open }) => {
                       User
                     </label>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                       id="user"
                     >
@@ -187,16 +184,16 @@ const Splits = ({ open }) => {
                     <label htmlFor="artist-split" className="form-label">
                       Artist Split
                     </label>
-                    <div class="input-group mb-3">
+                    <div className="input-group mb-3">
                       <input
                         type="number"
                         id="artist-split"
-                        class="form-control"
+                        className="form-control"
                         placeholder="Enter artist % spit"
                         aria-label="Recipient's username"
                         aria-describedby="basic-addon2"
                       />
-                      <span class="input-group-text" id="basic-addon2">
+                      <span className="input-group-text" id="basic-addon2">
                         %
                       </span>
                     </div>

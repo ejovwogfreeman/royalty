@@ -5,9 +5,10 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastifyContext } from "../context/ToastifyContext";
-import Multiselect from "multiselect-react-dropdown";
+// import Multiselect from "multiselect-react-dropdown";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import { AiFillMinusSquare } from "react-icons/ai";
+import BSON from "bson";
 
 const Artist = ({ open }) => {
   const [artist, setArtist] = useState([]);
@@ -24,7 +25,19 @@ const Artist = ({ open }) => {
     const list = [...SplitList];
     list[index][name] = value;
     setSplitList(list);
-    setForm({ ...form, split: list });
+    console.log(SplitList);
+    let split = {};
+    let newObject;
+    for (let i = 0; i < SplitList.length; i++) {
+      const newSplit = Object.assign(split, {
+        [SplitList[i].user]: SplitList[i].split,
+      });
+      setForm({ ...form, split: newSplit });
+    }
+    // console.log(newObject);
+    // const bsonData = BSON.serialize(list);
+    // const bsonDocument = new BSON.deserialize(bsonData);
+    // setForm({ ...form, split: bsonDocument });
   };
 
   const handleSplitRemove = (index) => {
@@ -34,12 +47,12 @@ const Artist = ({ open }) => {
   };
 
   const handleSplitAdd = () => {
-    setSplitList([...SplitList, { user: "", share: "" }]);
+    setSplitList([...SplitList, { user: "", split: "" }]);
   };
 
   const [form, setForm] = useState({
     artistName: "",
-    Users: [],
+    users: [],
     signDate: "",
     split: [],
   });
@@ -58,38 +71,38 @@ const Artist = ({ open }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    // axios
-    //   .post(`https://api.royalti.io/artist/`, form, {
-    //     headers: {
-    //       Accept: "application/json",
-    //       Authorization: "Bearer 7bd60554-4f63-4c62-a5f6-c29c3f67cb2a",
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     setToastifyState({
-    //       ...ToastifyState,
-    //       message: "User Created Successfully",
-    //       variant: "success",
-    //       open: true,
-    //     });
-    //     navigate("/");
-    //     setTimeout(() => {
-    //       window.location.reload();
-    //     }, 1000);
-    //     setLoading(false);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setLoading(false);
-    //     setToastifyState({
-    //       ...ToastifyState,
-    //       message: "Something went wrong",
-    //       variant: "error",
-    //       open: true,
-    //     });
-    //     setLoading(false);
-    //   });
+    axios
+      .post(`https://api.royalti.io/artist/`, form, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer 7bd60554-4f63-4c62-a5f6-c29c3f67cb2a",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setToastifyState({
+          ...ToastifyState,
+          message: "User Created Successfully",
+          variant: "success",
+          open: true,
+        });
+        navigate("/");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        setToastifyState({
+          ...ToastifyState,
+          message: "Something went wrong",
+          variant: "error",
+          open: true,
+        });
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -204,7 +217,16 @@ const Artist = ({ open }) => {
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{x.artistName}</td>
-                    <td>{x.Users.length > 0 ? x.Users[0].fullName : null}</td>
+                    {/* <td>{x.Users.length > 0 ? x.Users[0].fullName : null}</td> */}
+                    <td>
+                      {x.Users.length > 0
+                        ? x.Users.map((x, index) => (
+                            <span key={index}>
+                              <span>{x.fullName}</span>,&nbsp;
+                            </span>
+                          ))
+                        : null}
+                    </td>
                     <td>
                       <Link
                         to={`/edit-artist/${x.id}`}
@@ -277,13 +299,26 @@ const Artist = ({ open }) => {
                     <label htmlFor="user" className="form-label">
                       User
                     </label>
-                    <Multiselect
-                      options={options}
-                      showCheckbox
-                      onSelect={(e) => setForm({ ...form, Users: e })}
-                      placeholder="Select Users"
-                      displayValue="fullName"
-                    />
+                    <select
+                      name=""
+                      id=""
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          users: [...e.target.selectedOptions].map(
+                            (opt) => opt.value
+                          ),
+                        })
+                      }
+                      style={{ width: "100%" }}
+                      multiple
+                    >
+                      {options.map((x, index) => (
+                        <option key={index} value={x.id}>
+                          {x.fullName}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="apartment" className="form-label">
@@ -323,13 +358,13 @@ const Artist = ({ open }) => {
                           />
                           <datalist id="data">
                             {options.map((x, key) => (
-                              <option key={key} value={x.fullName} />
+                              <option key={key} value={x.id} />
                             ))}
                           </datalist>
                         </span>
                         <span className="d-flex" style={{ flex: "1" }}>
                           <input
-                            name="share"
+                            name="split"
                             type="number"
                             className="form-control"
                             onChange={(e) => handleSplitChange(e, index)}

@@ -94,35 +94,22 @@ const Users = ({ open }) => {
   const deleteBtn = () => {
     console.log(deleteId);
     setLoading(true);
-    axios
-      .delete(`https://api.royalti.io/user/${deleteId}`, {
-        headers: {
-          Authorization: "Bearer 7bd60554-4f63-4c62-a5f6-c29c3f67cb2a",
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        setToastifyState({
-          ...ToastifyState,
-          message: "User Deleted successfully",
-          variant: "success",
-          open: true,
-        });
-        setLoading(false);
-        navigate("/");
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setToastifyState({
-          ...ToastifyState,
-          message: "An Error Occured",
-          variant: "error",
-          open: true,
-        });
-      });
+    axios.delete(`https://api.royalti.io/user/${deleteId}`, {
+      headers: {
+        Authorization: "Bearer 7bd60554-4f63-4c62-a5f6-c29c3f67cb2a",
+      },
+    });
+    setToastifyState({
+      ...ToastifyState,
+      message: "User Deleted successfully",
+      variant: "success",
+      open: true,
+    });
+    setLoading(false);
+    navigate("/");
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   return (
@@ -303,7 +290,7 @@ const Users = ({ open }) => {
                       User Type
                     </label>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                       id="user"
                       name="userType"
@@ -332,37 +319,39 @@ const Users = ({ open }) => {
             </div>
           </div>
           <div
-            class="modal fade"
+            className="modal fade"
             id="exampleModal3"
-            tabindex="-1"
+            tabIndex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
                     Delete User
                   </h5>
                   <button
                     type="button"
-                    class="btn-close"
+                    className="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body">Are you sure you want to delete?</div>
-                <div class="modal-footer">
+                <div className="modal-body">
+                  Are you sure you want to delete?
+                </div>
+                <div className="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-outline-secondary"
+                    className="btn btn-outline-secondary"
                     data-bs-dismiss="modal"
                   >
                     Close
                   </button>
                   <button
                     type="button"
-                    class="btn btn-outline-danger"
+                    className="btn btn-outline-danger"
                     onClick={() => deleteBtn()}
                   >
                     DELETE

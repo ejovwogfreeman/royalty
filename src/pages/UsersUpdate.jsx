@@ -77,6 +77,7 @@ const UsersUpdate = ({ open }) => {
         setUser(res.data);
         console.log(res.data);
         console.log(res.data.TenantUser.nickName);
+        console.log(user);
         setForm({
           firstName: res ? res.data.firstName : "",
           lastName: res ? res.data.lastName : "",
@@ -88,7 +89,7 @@ const UsersUpdate = ({ open }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [params.id]);
 
   return (
     <div className={open ? "cont" : "cont end"}>
